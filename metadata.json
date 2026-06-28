@@ -1,0 +1,6 @@
+{
+  "name": "PRISM",
+  "description": "Personal Relationship Intelligence System - Add, save, and view personal relationships securely in the browser.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
