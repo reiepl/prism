@@ -16,6 +16,15 @@ import {
   type Element,
 } from '@4n6h4x0r/stem-branch';
 
+// New imports for orchestration
+import { AnalyzerManager } from './AnalyzerManager';
+import { getBlueprintForPerson } from '../adapter/blueprintAdapter';
+import { type Person } from '../types/person';
+import { type Blueprint } from '../models/blueprint';
+import { type AnalysisContext } from '../../analyzers/common/AnalysisContext';
+import { type AnalysisReport } from '../models/AnalysisReport';
+
+// Existing engine exports
 export interface RawPillar {
   stem: Stem;
   branch: Branch;
@@ -162,4 +171,34 @@ export function executeEngine(date: Date, hasHour: boolean): RawEngineOutput {
     elements,
     tenGods,
   };
+}
+
+/**
+ * Orchestration layer for the PRISM analysis engine.
+ */
+export class BaZiEngine {
+  private readonly analyzerManager: AnalyzerManager;
+
+  constructor() {
+    this.analyzerManager = new AnalyzerManager();
+  }
+
+  /**
+   * Orchestrates the analysis pipeline for a given person.
+   */
+  public analyze(person: Person): AnalysisReport {
+    // 1. Generate the Blueprint
+    const blueprint = getBlueprintForPerson(person);
+
+    // 2. Create the AnalysisContext
+    const context: AnalysisContext = {
+      blueprint,
+    };
+
+    // 3. Return the AnalysisReport (Analyzers are not executed in Sprint 2)
+    return {
+      blueprint,
+      analyses: [],
+    };
+  }
 }
